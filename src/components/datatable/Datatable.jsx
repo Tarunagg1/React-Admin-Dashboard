@@ -41,14 +41,14 @@ const Datatable = () => {
                     Add New
                 </Link>
             </div>
-            {/* <DataGrid
+            <DataGrid
                 className="datagrid"
                 rows={data}
                 columns={userColumns.concat(actionColumn)}
                 pageSize={9}
                 rowsPerPageOptions={[9]}
                 checkboxSelection
-            /> */}
+            />
         </div>
     );
 };

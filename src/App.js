@@ -5,33 +5,40 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import { Fragment } from 'react';
+import { Fragment, useContext, useState } from 'react';
 import Login from './pages/login/Login';
 import Single from './pages/single/Single';
 import New from './pages/new/New';
 import List from './pages/list/List';
+import { userInputs } from './formsource';
+import './style/dark.scss';
+import { DarkModeContext } from './context/darkModeContext';
 
 function App() {
+  const {darkMode} = useContext(DarkModeContext);
+
   return (
     <Fragment>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/">
-            <Route index element={<Home />} />
-            <Route path="login" element={<Login />} />
-            <Route path="users">
-              <Route index element={<List />} />
-              <Route path=":userid" element={<Single />} />
-              <Route path="new" element={<New />} />
+      <div className={darkMode ? 'app dark' : "app"}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/">
+              <Route index element={<Home />} />
+              <Route path="login" element={<Login />} />
+              <Route path="users">
+                <Route index element={<List />} />
+                <Route path=":userid" element={<Single />} />
+                <Route path="new" element={<New inputs={userInputs} title="Add new user" />} />
+              </Route>
+              <Route path="products">
+                <Route index element={<List />} />
+                <Route path=":userid" element={<Single />} />
+                <Route path="new" element={<New inputs={userInputs} title="Add new products" />} />
+              </Route>
             </Route>
-            <Route path="products">
-              <Route index element={<List />} />
-              <Route path=":userid" element={<Single />} />
-              <Route path="new" element={<New />} />
-            </Route>
-          </Route>
-        </Routes>
-      </BrowserRouter>
+          </Routes>
+        </BrowserRouter>
+      </div>
     </Fragment>
   );
 }
